@@ -2,6 +2,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 5vh;
+    width: 40vw;
+
+
+    border-top: #f0f0f0 1px solid;
+    border-bottom: #f0f0f0 1px solid;
 }
 
 #inputs-container {
@@ -10,7 +16,7 @@
     gap: 25%;
     
     height: 30vh;
-    width: 80vw;
+    width: 40vw;
 
     justify-content: center;
     align-items: center;
@@ -18,20 +24,21 @@
 
 #inputs-container > div {
     flex-grow: 50%;
-    width: 25%;
     position: relative;
     
 }
 
-#inputs-container > div > input {
+#inputs-container > div > input, #inputs-container > button {
     background-color: transparent;
+
     font: large light;
     color: #f0f0f0ff;
+
     border: #f0f0f0 solid 0.1rem;
     text-align: center;
+    width: 16rem;
 }
 
-#inputs-container > div > input ~ label {
-    transition: all 2s;
-
+#inputs-container > button {
+    margin: 0 10vw;
 }
