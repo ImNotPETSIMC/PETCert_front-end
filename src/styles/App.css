@@ -19,6 +19,7 @@
   font-size: calc(10px + 2vmin);
   color: white;
   position: fixed;
+  z-index: -1;
   -moz-transform: scale(1.125);
   -webkit-transform: scale(1.125);
   -ms-transform: scale(1.125);
