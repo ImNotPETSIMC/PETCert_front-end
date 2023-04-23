@@ -1,11 +1,16 @@
 .PETCert {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #inputs-container {
     display: flex;
     flex-wrap: wrap;
     gap: 25%;
+    
+    height: 30vh;
+    width: 80vw;
 
     justify-content: center;
     align-items: center;
@@ -14,4 +19,19 @@
 #inputs-container > div {
     flex-grow: 50%;
     width: 25%;
+    position: relative;
+    
+}
+
+#inputs-container > div > input {
+    background-color: transparent;
+    font: large light;
+    color: #f0f0f0ff;
+    border: #f0f0f0 solid 0.1rem;
+    text-align: center;
+}
+
+#inputs-container > div > input ~ label {
+    transition: all 2s;
+
 }
