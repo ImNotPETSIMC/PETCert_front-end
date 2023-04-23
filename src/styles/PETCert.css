@@ -58,6 +58,8 @@
 
     font-weight: 300;
     font-family: 'Source Sans Pro', sans-serif;
+
+    transition: all 0.5s;
 }
 
 #inputs-container > button {
@@ -73,4 +75,12 @@
     background-color: #1b1f22;
     color: #f0f0f0ff;
     transition: all 0.5s;
+}
+
+#inputs-container > div > input:focus {
+    border-color: transparent;
+    border-bottom: #f0f0f0 solid 0.1rem;
+    outline: 0;
+
+    transition: border 0.5;
 }
