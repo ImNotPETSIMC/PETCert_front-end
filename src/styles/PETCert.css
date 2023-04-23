@@ -12,20 +12,36 @@
     letter-spacing: 0.2rem;
 }
 
+.PETCert > h1 {
+    font-size: 2.25rem;
+    line-height: 1.3;
+    letter-spacing: 0.5rem;
+    font-weight: 500;
+}
+
 #inputs-container {
     display: flex;
     flex-wrap: wrap;
-    row-gap: 2rem;
+    row-gap: 1rem;
     
     width: 40vw;
 
     justify-content: center;
     align-items: center;
+    font-size: 0.6rem;
 
+    gap: 1.4rem 0rem;
 }
 
 #inputs-container > div {
     flex-basis: 50%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 0.5rem;
 }
 
 #inputs-container > div > input, #inputs-container > button {
@@ -36,19 +52,21 @@
 
     border: #f0f0f0 solid 0.1rem;
     text-align: center;
-    width: 16rem;
+    width: 12rem;
     border-radius: 4px;
 
-    line-height: 2.75rem;
+    line-height: 2rem;
+
+    font-weight: 300;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 #inputs-container > button {
-    margin: 0 10vw 3vh 10vw;
+    margin-bottom: 3vh;
     background-color: #f0f0f0ff;
     color: #1b1f22;
-    font-weight: 300;
-    font-family: 'Source Sans Pro', sans-serif;
-    padding: 3px;
+
+    font-size: 0.75rem;
     transition: all 0.5s;
 }
 
