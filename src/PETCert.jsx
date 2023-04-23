@@ -29,8 +29,11 @@ function PETCert() {
     return (
         <div className="PETCert">
             <h1>PETCert</h1>
-            <div id='inputs-container'>{inputNames.map((input) => generateInput(input))}</div>
-            <button type="submit" id='getCertificate'>Gerar Certificado</button>
+            <div id='inputs-container'>
+                {inputNames.map((input) => generateInput(input))}
+                <button type="submit" id='getCertificate'>Gerar Certificado</button>
+            </div>
+            
         </div>
     );
 }
