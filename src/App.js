@@ -8,6 +8,7 @@ function App() {
       <main>
         <PETCert />
       </main>
+      <footer>© 2023 - Sistemas de Informação. Todos os direitos reservados.</footer>
     </div>
   );
 }
