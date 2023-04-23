@@ -6,17 +6,19 @@ const generateInput = (name, label) => {
     
     if(!label){
         return (
-            <div>
-                <label htmlFor={id}>{name}</label>
+            <div className={id +"-container"}>
                 <input type="text" name="" id={id} />
+                <br />
+                <label htmlFor={id}>{name}</label>
             </div>
         )
     };
     
     return (
-        <div>
-            <label htmlFor={id}>{label}</label>
+        <div className={id +"-container"}>
             <input type="text" name="" id={id} />
+            <br />
+            <label htmlFor={id}>{label}</label>
         </div>
     )
 }
