@@ -28,7 +28,6 @@
     flex-basis: 50%;
 }
 
-
 #inputs-container > div > input, #inputs-container > button {
     background-color: transparent;
 
@@ -44,7 +43,7 @@
 }
 
 #inputs-container > button {
-    margin: 0 10vw;
+    margin: 0 10vw 3vh 10vw;
     background-color: #f0f0f0ff;
     color: #1b1f22;
     font-weight: 300;
@@ -54,7 +53,6 @@
 }
 
 #inputs-container > button:hover {
-    margin: 0 10vw;
     background-color: #1b1f22;
     color: #f0f0f0ff;
     transition: all 0.5s;
