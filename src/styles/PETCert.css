@@ -1,0 +1,17 @@
+.PETCert {
+    display: block;
+}
+
+#inputs-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25%;
+
+    justify-content: center;
+    align-items: center;
+}
+
+#inputs-container > div {
+    flex-grow: 50%;
+    width: 25%;
+}

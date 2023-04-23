@@ -1,3 +1,5 @@
+import './styles/PETCert.css'
+
 const generateInput = (name, label) => {
     const aux = String(name).replace(' ', '-');
     const id = String(aux).toLowerCase();
@@ -7,7 +9,6 @@ const generateInput = (name, label) => {
             <div>
                 <label htmlFor={id}>{name}</label>
                 <input type="text" name="" id={id} />
-                <br />
             </div>
         )
     };
@@ -16,7 +17,6 @@ const generateInput = (name, label) => {
         <div>
             <label htmlFor={id}>{label}</label>
             <input type="text" name="" id={id} />
-            <br />
         </div>
     )
 }
@@ -27,7 +27,8 @@ function PETCert() {
     return (
         <div className="PETCert">
             <h1>PETCert</h1>
-            {inputNames.map((input) => generateInput(input))};
+            <div id='inputs-container'>{inputNames.map((input) => generateInput(input))}</div>
+            <button type="submit" id='getCertificate'>Gerar Certificado</button>
         </div>
     );
 }
