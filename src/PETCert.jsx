@@ -8,7 +8,6 @@ const generateInput = (name, label) => {
         return (
             <div className={id +"-container"}>
                 <input type="text" name="" id={id} />
-                <br />
                 <label htmlFor={id}>{name.toUpperCase()}</label>
             </div>
         )
@@ -17,7 +16,6 @@ const generateInput = (name, label) => {
     return (
         <div className={id +"-container"}>
             <input type="text" name="" id={id} />
-            <br />
             <label htmlFor={id}>{label}</label>
         </div>
     )
@@ -33,7 +31,6 @@ function PETCert() {
                 {inputNames.map((input) => generateInput(input))}
                 <button type="submit" id='getCertificate'>GERAR CERTIFICADO</button>
             </div>
-            
         </div>
     );
 }
