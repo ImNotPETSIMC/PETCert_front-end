@@ -2,31 +2,32 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 5vh;
-    width: 40vw;
+    justify-content: center;
+    padding: 3vh;
 
+    width: 40vw;
 
     border-top: #f0f0f0 1px solid;
     border-bottom: #f0f0f0 1px solid;
+    letter-spacing: 0.2rem;
 }
 
 #inputs-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 25%;
+    row-gap: 2rem;
     
-    height: 30vh;
     width: 40vw;
 
     justify-content: center;
     align-items: center;
+
 }
 
 #inputs-container > div {
-    flex-grow: 50%;
-    position: relative;
-    
+    flex-basis: 50%;
 }
+
 
 #inputs-container > div > input, #inputs-container > button {
     background-color: transparent;
@@ -37,8 +38,24 @@
     border: #f0f0f0 solid 0.1rem;
     text-align: center;
     width: 16rem;
+    border-radius: 4px;
+
+    line-height: 2.75rem;
 }
 
 #inputs-container > button {
     margin: 0 10vw;
+    background-color: #f0f0f0ff;
+    color: #1b1f22;
+    font-weight: 300;
+    font-family: 'Source Sans Pro', sans-serif;
+    padding: 3px;
+    transition: all 0.5s;
+}
+
+#inputs-container > button:hover {
+    margin: 0 10vw;
+    background-color: #1b1f22;
+    color: #f0f0f0ff;
+    transition: all 0.5s;
 }
