@@ -106,3 +106,9 @@
 
     transition: border 0.5;
 }
+
+#inputs-container > div > input:placeholder-shown{
+    border: #ff00004d solid 0.1rem;
+
+    transition: border 0.5;
+}
