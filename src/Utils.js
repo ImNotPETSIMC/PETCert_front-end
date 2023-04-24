@@ -5,7 +5,7 @@ export const generateInput = (name, label) => {
     if(!label){
         return (
             <div className={id +"-container"}>
-                <input type="text" name="" id={id} />
+                <input type="text" name="" id={id} placeholder={name}/>
                 <label htmlFor={id}>{name.toUpperCase()}</label>
             </div>
         )
@@ -13,7 +13,7 @@ export const generateInput = (name, label) => {
     
     return (
         <div className={id +"-container"}>
-            <input type="text" name="" id={id} />
+            <input type="text" name="" id={id} placeholder={name}/>
             <label htmlFor={id}>{label.toUpperCase()}</label>
         </div>
     )
