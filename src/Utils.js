@@ -1,4 +1,6 @@
 import Axios from "axios";
+import { Base64 } from 'js-base64';
+import FileSaver from 'file-saver';
 
 export const generateInput = (name, fn) => {
     const aux = String(name).replace(' ', '_');
@@ -25,5 +27,10 @@ export const getCertificate = ({pessoa_certificada, nome_curso, tipo_certificado
         nome_assinante: nome_assinante,
         cargo_assinatura: 'Tutor'
     })
-    .then(response => console.log(response.data))
-}
+    .then(response => response.data)
+    .then(response => Base64.atob(response.data))
+    .then((response) => {
+        const blob = new Blob([response], { type: 'data:application/pdf;base64,' + response, });
+        FileSaver.saveAs(blob, 'test.pdf');
+    });
+};
