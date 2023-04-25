@@ -49,20 +49,25 @@ export const getCertificate = async ({
       downloadPDF(signedCertificate);
     })
     .catch((err) => {
-      swalError(err.response.data)
+      swalError(err.response.data);
     });
 };
 
 export const signCertificate = async (certificateB64) => {
-  const req = await Axios.post("http://localhost:8500/signature/sign", {
-    data: certificateB64
-  });
+  try {
+    const req = await Axios.post("http://localhost:8500/signature/sign", {
+      data: certificateB64
+    });
 
-  const response = req.data;
+    const response = req.data;
 
-  const signedCertificateB64 = response.signedPDF;
+    const signedCertificateB64 = response.signedPDF;
 
-  return signedCertificateB64;
+    return signedCertificateB64;
+  } catch (error) {
+    swalError(error.message);
+    throw error;
+  }
 };
 
 const swalError = (errorMessage) => {
@@ -73,4 +78,4 @@ const swalError = (errorMessage) => {
     background: "#D0D0D0FF",
     confirmButtonColor: "#1B1F22"
   });
-}
+};
