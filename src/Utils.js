@@ -1,6 +1,4 @@
 import Axios from "axios";
-import { Base64 } from 'js-base64';
-import FileSaver from 'file-saver';
 
 export const generateInput = (name, fn) => {
     const aux = String(name).replace(' ', '_');
@@ -14,7 +12,7 @@ export const generateInput = (name, fn) => {
     )
 }
 
-export const getCertificate = ({pessoa_certificada, nome_curso, tipo_certificado, responsaveis_atividade, cidade_e_data, nome_assinante}) => {
+export const getB64PDF = async ({pessoa_certificada, nome_curso, tipo_certificado, responsaveis_atividade, cidade_e_data, nome_assinante}) => {
     responsaveis_atividade = String(responsaveis_atividade).split(",");
     responsaveis_atividade.map((string) => string.trim());
 
@@ -28,9 +26,14 @@ export const getCertificate = ({pessoa_certificada, nome_curso, tipo_certificado
         cargo_assinatura: 'Tutor'
     })
     .then(response => response.data)
-    .then(response => Base64.atob(response.data))
-    .then((response) => {
-        const blob = new Blob([response], { type: 'data:application/pdf;base64,' + response, });
-        FileSaver.saveAs(blob, 'test.pdf');
-    });
+    .then((response) =>  { return response.data });
 };
+
+export const downloadPDF = (pdf) => {
+    const sourceLink = `data:application/pdf;base64,${pdf}`;
+    const download = document.createElement("a");
+    const fileName = "PET_Certificate.pdf";
+    download.href = sourceLink;
+    download.download = fileName;
+    download.click();
+}
