@@ -1,4 +1,5 @@
 import Axios from "axios";
+import Swal from 'sweetalert2';
 
 export const generateInput = (name, fn) => {
     const aux = String(name).replace(' ', '_');
@@ -35,5 +36,14 @@ export const getCertificate = async ({pessoa_certificada, nome_curso, tipo_certi
         cargo_assinatura: 'Tutor'
     })
     .then(response => response.data)
-    .then((response) =>  { downloadPDF(response.data) });
+    .then((response) =>  { downloadPDF(response.data) })
+    .catch(err => {
+        Swal.fire({
+            icon: 'error',
+            title: 'SOLICITAÇÃO FALHOU',
+            text: err.response.data,
+            background: '#D0D0D0FF',
+            confirmButtonColor: '#1B1F22',
+        })
+    });
 };
