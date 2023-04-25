@@ -12,7 +12,10 @@ export const generateInput = (name, fn) => {
     )
 }
 
-export const getCertificate = (pessoa_certificada, nome_curso, tipo_certificado, responsaveis_atividade, cidade_e_data, nome_assinante) => {
+export const getCertificate = ({pessoa_certificada, nome_curso, tipo_certificado, responsaveis_atividade, cidade_e_data, nome_assinante}) => {
+    responsaveis_atividade = String(responsaveis_atividade).split(",");
+    responsaveis_atividade.map((string) => string.trim());
+
     Axios.post("http://localhost:8000/getCertificado", {
         pessoa_certificada: pessoa_certificada,
         nome_curso: nome_curso,
