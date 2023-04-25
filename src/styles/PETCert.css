@@ -16,9 +16,9 @@
         box-shadow:0 0 20px #ff000000;
     }
     50% {
-        -webkit-box-shadow:0 0 20px #ff00004d; 
-        -moz-box-shadow: 0 0 20px #ff00004d; 
-        box-shadow:0 0 20px #ff00004d; 
+        -webkit-box-shadow:0 0 20px #ff000080; 
+        -moz-box-shadow: 0 0 20px #ff000080; 
+        box-shadow:0 0 20px #ff000080; 
     }
     100% {    
         -webkit-box-shadow:0 0 20px #ff000000; 
