@@ -12,7 +12,16 @@ export const generateInput = (name, fn) => {
     )
 }
 
-export const getB64PDF = async ({pessoa_certificada, nome_curso, tipo_certificado, responsaveis_atividade, cidade_e_data, nome_assinante}) => {
+export const downloadPDF = (pdf) => {
+    const sourceLink = `data:application/pdf;base64,${pdf}`;
+    const download = document.createElement("a");
+    const fileName = "PET_Certificate.pdf";
+    download.href = sourceLink;
+    download.download = fileName;
+    download.click();
+}
+
+export const getCertificate = async ({pessoa_certificada, nome_curso, tipo_certificado, responsaveis_atividade, cidade_e_data, nome_assinante}) => {
     responsaveis_atividade = String(responsaveis_atividade).split(",");
     responsaveis_atividade.map((string) => string.trim());
 
@@ -26,14 +35,5 @@ export const getB64PDF = async ({pessoa_certificada, nome_curso, tipo_certificad
         cargo_assinatura: 'Tutor'
     })
     .then(response => response.data)
-    .then((response) =>  { return response.data });
+    .then((response) =>  { downloadPDF(response.data) });
 };
-
-export const downloadPDF = (pdf) => {
-    const sourceLink = `data:application/pdf;base64,${pdf}`;
-    const download = document.createElement("a");
-    const fileName = "PET_Certificate.pdf";
-    download.href = sourceLink;
-    download.download = fileName;
-    download.click();
-}
