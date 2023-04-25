@@ -33,7 +33,6 @@
     align-items: center;
     justify-content: center;
 
-    width: 40vw;
     min-width: fit-content;
 
     border-top: #f0f0f0 1px solid;
@@ -62,8 +61,8 @@
     flex-wrap: wrap;
     row-gap: 1rem;
     
-    width: 40vw;
     min-width: fit-content;
+    max-width: 50rem;
 
     justify-content: center;
     align-items: center;
@@ -95,7 +94,7 @@
 
     border: #f0f0f0 solid 0.1rem;
     text-align: center;
-    width: 12rem;
+    width: 10rem;
     border-radius: 4px;
 
     line-height: 2rem;
