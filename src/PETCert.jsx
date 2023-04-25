@@ -9,7 +9,7 @@ function PETCert() {
         pessoa_certificada: "",
         nome_curso: "",
         tipo_certificado: "",
-        responsaveis_atividade: [],
+        responsaveis_atividade: "",
         cidade_e_data: "",
         nome_assinante: ""
     });
@@ -24,7 +24,7 @@ function PETCert() {
             <h1>PETCERT</h1>
             <div id='inputs-container'>
                 {inputNames.map((input) => generateInput(input, handleChange))}
-                <button type="submit" id='getCertificate' onClick={() => {getCertificate()}}>GERAR CERTIFICADO</button>
+                <button type="submit" id='getCertificate' onClick={() => {getCertificate(inputValues)}}>GERAR CERTIFICADO</button>
             </div>
         </div>
     );
