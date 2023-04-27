@@ -1,4 +1,4 @@
-import PDFDocument from "@react-pdf/renderer";
+import PDFDocument from "@react-pdf/pdfkit";
 import { toDataURL } from "qrcode";
 import { isEmpty, isAlpha } from "validator";
 import { encode } from 'js-base64';
@@ -38,7 +38,7 @@ const generatePDF = async (req) => {
     const veredito = await validarParametros(body);
     if (!veredito["Accept"]) {
       console.log(veredito);
-      //return res.status(400).send(veredito["Cause"]).end();
+      return veredito;
     }
 
     const tipoCerticado = body["tipo-certificado"];
@@ -52,8 +52,9 @@ const generatePDF = async (req) => {
       size: "A4",
       bufferPages: true
     });
+    
     const distanceMargin = 18;
-
+    
     const grad = doc.linearGradient(0, 0, 0, 100);
     grad.stop(0, "#31FFEF");
     grad.stop(1, "#8CA5FF");
@@ -67,34 +68,35 @@ const generatePDF = async (req) => {
       distanceMargin,
       doc.page.width - distanceMargin * 2,
       doc.page.height - distanceMargin * 2
-    )
-    .stroke();
-
-    const maxWidth = 280;
-    const maxHeight = 140;
-    doc.image(
-      __dirname + "/../../public/website/images/logoPET.png",
-      doc.page.width / 2 - maxWidth / 2,
-      60,
-      {
-        fit: [maxWidth, maxHeight],
-        align: "center"
-      }
-    );
-
-    const jumpLine = (doc, lines) => { for(let index = 0; index < lines; index++) { doc.moveDown(); } }
-
-    jumpLine(doc, 11);
-
-    doc
-    .font("Helvetica")
-    .fontSize(28)
-    .fill("#021c27")
-    .font("Times-BoldItalic")
-    .text("Certificado de Conclusão", { align: "center"});
-
-    jumpLine(doc, 1);
-
+      )
+      .stroke();
+      
+      const maxWidth = 280;
+      const maxHeight = 140;
+      doc.image(
+        __dirname + "/../assets/logo.png", // FIX DIR
+        doc.page.width / 2 - maxWidth / 2,
+        60,
+        {
+          fit: [maxWidth, maxHeight],
+          align: "center"
+        }
+      );
+        
+      const jumpLine = (doc, lines) => { for(let index = 0; index < lines; index++) { doc.moveDown(); } }
+      
+      jumpLine(doc, 11);
+      
+      doc
+      .font("Helvetica")
+      .fontSize(28)
+      .fill("#021c27")
+      .font("Times-BoldItalic")
+      .text("Certificado de Conclusão", { align: "center"});
+        
+      jumpLine(doc, 1);
+        
+      
     doc
     .fontSize(18)
     .fill("#021c27")
@@ -144,23 +146,23 @@ const generatePDF = async (req) => {
       "Carga horária: 30 horas",
       doc.x,
       doc.page.height - oldBottomMargin, { align: "center" }
-    )
-    .moveDown(0.5)
-    .fill("#021c27")
+      )
+      .moveDown(0.5)
+      .fill("#021c27")
     .font("Times-BoldItalic")
     .text(body["cidade-e-data"], {
       align: "center"
     });
-
-
+    
+    
     // Signatures
     doc.lineWidth(1);
     const lineSize = 174;
     const signatureHeight = doc.page.height - oldBottomMargin - 50;
-
+    
     doc.fillAndStroke("#021c27");
     doc.strokeOpacity(0.2);
-
+    
 
     const endLine1 = 128 + lineSize;
     const startLine2 = endLine1 + 32;
@@ -196,7 +198,7 @@ const generatePDF = async (req) => {
         align: "center"
       }
     );
-
+    
     toDataURL(link_qr, (err, src) => {
       if (err) throw new Error("Erro ao gerar o QrCode");
       doc.image(
@@ -213,7 +215,6 @@ const generatePDF = async (req) => {
 
       const pdfB64 = encode(doc);
 
-      console.log(pdfB64);
       return { data: pdfB64 };
 
       /*var pdfB64 = "";
