@@ -27,7 +27,7 @@ const validarParametros = async (body) => {
   return { Accept: true, Cause: "Tudo Ok" };
 };
 
-export default async (req, res) => {
+export default async (req) => {
   try {
     const {
       pessoa_certificada,
@@ -38,6 +38,7 @@ export default async (req, res) => {
       nome_assinante,
       cargo_assinatura
     } = req.body;
+
     const body = {
       "pessoa-certificada": pessoa_certificada,
       "nome-curso": nome_curso,
@@ -47,7 +48,8 @@ export default async (req, res) => {
       assinatura: nome_assinante,
       "cargo-assinatura": cargo_assinatura
     };
-    let link_qr = "https://www.google.com.br";
+
+    const link_qr = "https://www.google.com.br";
 
     const veredito = await validarParametros(body);
     if (!veredito["Accept"]) {
@@ -55,14 +57,9 @@ export default async (req, res) => {
       return res.status(400).send(veredito["Cause"]).end();
     }
 
-    switch (body["tipo-certificado"]) {
-      case "conclusao":
-        body["tipo-certificado"] = ", concluiu com exito o(a) ";
-        break;
-      case "participacao":
-        body["tipo-certificado"] = ", participou do(a) ";
-        break;
-    }
+    const tipoCerticado = body["tipo-certificado"];
+    if(tipoCerticado == "conclusao") body["tipo-certificado"] = ", concluiu com exito o(a) ";
+    else if(tipoCerticado == "participacao") body["tipo-certificado"] = ", participou do(a) ";
 
     //Daqui para baixo é onde desenha o PDF
     const doc = new PDFDocument({
