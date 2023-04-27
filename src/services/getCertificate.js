@@ -11,7 +11,7 @@ const checkAlpha = (target) => { return isAlpha(("" + target.replace(/ /g, ""), 
 const validarParametros = async (body) => {
   if ( checkEmpty(body["pessoa-certificada"]) || !checkAlpha(body["pessoa-certificada"]) ) return { Accept: false, Cause: "Nome da pessoa certificada inválido" };
   if ( checkEmpty(body["nome-curso"]) || !checkAlpha(body["nome-curso"]) ) return { Accept: false, Cause: "Nome do curso inválido" };
-  if (!["conclusao", "participacao"].includes(body["tipo-certificado"])) return { Accept: false, Cause: "Tipo de certificado inválido, dispoíveis: 'conclusao' e 'participacao'" };
+  if (!["conclusao", "participacao"].includes(body["tipo-certificado"])) return { Accept: false, Cause: "Tipo de certificado inválido, disponíveis: 'conclusao' e 'participacao'" };
   if (!Array.isArray(body["responsaveis-atividade"])) return { Accept: false, Cause: "O campo 'responsaveis-atividade' deve ser um array" };
   if (body["responsaveis-atividade"].length < 1) return { Accept: false, Cause: "O campo 'responsaveis-atividade' deve conter ao menos um nome" };
 
