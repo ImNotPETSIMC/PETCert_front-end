@@ -1,5 +1,6 @@
 import Axios from "axios";
 import Swal from "sweetalert2";
+import getCertificate from "./services/getCertificate";
 
 export const generateInput = (name, fn) => {
   const aux = String(name).replace(" ", "_");
@@ -22,7 +23,7 @@ export const downloadPDF = (pdf) => {
   download.click();
 };
 
-export const getCertificate = async ({
+export const getCertificatePDF = async ({
   pessoa_certificada,
   nome_curso,
   tipo_certificado,
@@ -33,23 +34,27 @@ export const getCertificate = async ({
   responsaveis_atividade = String(responsaveis_atividade).split(",");
   responsaveis_atividade.map((string) => string.trim());
 
-  Axios.post("http://localhost:8000/getCertificado", {
-    pessoa_certificada: pessoa_certificada,
-    nome_curso: nome_curso,
-    tipo_certificado: tipo_certificado,
-    responsaveis_atividade: responsaveis_atividade,
-    cidade_e_data: cidade_e_data,
-    nome_assinante: nome_assinante,
-    cargo_assinatura: "Tutor"
-  })
-    .then((response) => response.data)
+  getCertificate({
+        pessoa_certificada: pessoa_certificada,
+        nome_curso: nome_curso,
+        tipo_certificado: tipo_certificado,
+        responsaveis_atividade: responsaveis_atividade,
+        cidade_e_data: cidade_e_data,
+        nome_assinante: nome_assinante,
+        cargo_assinatura: "Tutor"
+    })
+    .then((response) => {
+      if(response.data) return response.data;
+      else(swalError(response.Cause));
+    })
     .then(async (response) => {
-      const unsignedCertificateB64 = response.data;
-      const signedCertificate = await signCertificate(unsignedCertificateB64);
-      downloadPDF(signedCertificate);
+        const unsignedCertificateB64 = response.data;
+        const signedCertificate = await signCertificate(unsignedCertificateB64);
+        downloadPDF(signedCertificate);
     })
     .catch((err) => {
-      swalError(err.response.data);
+      console.log(err)
+        swalError(err);
     });
 };
 
