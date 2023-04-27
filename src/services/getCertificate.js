@@ -6,65 +6,21 @@ import { Base64Encode } from "base64-stream";
 //http://localhost:5000/prv-pets/getCertificado
 
 const validarParametros = async (body) => {
-  if (
-    isEmpty("" + body["pessoa-certificada"]) ||
-    !isAlpha(
-      ("" + body["pessoa-certificada"]).replace(/ /g, ""),
-      "pt-BR"
-    )
-  ) {
-    return { Accept: false, Cause: "Nome da pessoa certificada inválido" };
-  }
-  if (
-    isEmpty("" + body["nome-curso"]) ||
-    !isAlpha(("" + body["nome-curso"]).replace(/ /g, ""), "pt-BR")
-  ) {
-    return { Accept: false, Cause: "Nome do curso inválido" };
-  }
-  if (!["conclusao", "participacao"].includes(body["tipo-certificado"])) {
-    return {
-      Accept: false,
-      Cause:
-        "Tipo de certificado inválido, dispoíveis: 'conclusao' e 'participacao'"
-    };
-  }
-  if (!Array.isArray(body["responsaveis-atividade"])) {
-    return {
-      Accept: false,
-      Cause: "O campo 'responsaveis-atividade' deve ser um array"
-    };
-  }
-  if (body["responsaveis-atividade"].length < 1) {
-    return {
-      Accept: false,
-      Cause: "O campo 'responsaveis-atividade' deve conter ao menos um nome"
-    };
-  }
+  if ( isEmpty("" + body["pessoa-certificada"]) || !isAlpha( ("" + body["pessoa-certificada"]).replace(/ /g, ""), "pt-BR" ) ) return { Accept: false, Cause: "Nome da pessoa certificada inválido" };
+  if ( isEmpty("" + body["nome-curso"]) || !isAlpha(("" + body["nome-curso"]).replace(/ /g, ""), "pt-BR") ) return { Accept: false, Cause: "Nome do curso inválido" };
+  if (!["conclusao", "participacao"].includes(body["tipo-certificado"])) return { Accept: false, Cause: "Tipo de certificado inválido, dispoíveis: 'conclusao' e 'participacao'" };
+  if (!Array.isArray(body["responsaveis-atividade"])) return { Accept: false, Cause: "O campo 'responsaveis-atividade' deve ser um array" };
+  if (body["responsaveis-atividade"].length < 1) return { Accept: false, Cause: "O campo 'responsaveis-atividade' deve conter ao menos um nome" };
+
   for (const resp of body["responsaveis-atividade"]) {
-    if (
-      isEmpty("" + resp) ||
-      !isAlpha(("" + resp).replace(/ /g, ""), "pt-BR")
-    ) {
-      return {
-        Accept: false,
-        Cause: "O campo 'responsaveis-atividade' tem algum nome inválido"
-      };
-    }
+    if ( isEmpty("" + resp) || !isAlpha(("" + resp).replace(/ /g, ""), "pt-BR")) return { Accept: false, Cause: "O campo 'responsaveis-atividade' tem algum nome inválido" };
   }
+  
   //Melhorar essa validação aqui
   const ci_data = body["cidade-e-data"].split(",");
   const li = ci_data[0].lastIndexOf(" ");
-  if (
-    isEmpty("" + body["assinatura"]) ||
-    !isAlpha(("" + body["assinatura"]).replace(/ /g, ""), "pt-BR", {
-      ignore: "."
-    })
-  ) {
-    return { Accept: false, Cause: "Nome da assinatura inválido" };
-  }
-  if (isEmpty("" + body["cargo-assinatura"])) {
-    return { Accept: false, Cause: "Cargo da assinatura inválido" };
-  }
+  if ( isEmpty("" + body["assinatura"]) || !isAlpha(("" + body["assinatura"]).replace(/ /g, ""), "pt-BR", { ignore: "."})) return { Accept: false, Cause: "Nome da assinatura inválido" };
+  if (isEmpty("" + body["cargo-assinatura"])) return { Accept: false, Cause: "Cargo da assinatura inválido" };
   return { Accept: true, Cause: "Tudo Ok" };
 };
 
