@@ -37,8 +37,7 @@ const generatePDF = async (req) => {
 
     const veredito = await validarParametros(body);
     if (!veredito["Accept"]) {
-      console.log(veredito);
-      return veredito;
+      throw new Error(veredito.Cause);
     }
 
     const tipoCerticado = body["tipo-certificado"];
@@ -74,7 +73,7 @@ const generatePDF = async (req) => {
       const maxWidth = 280;
       const maxHeight = 140;
       doc.image(
-        __dirname + "/../assets/logo.png", // FIX DIR
+        __dirname + "../../assets/logo.png", // FIX DIR
         doc.page.width / 2 - maxWidth / 2,
         60,
         {

@@ -43,18 +43,14 @@ export const getCertificatePDF = async ({
         nome_assinante: nome_assinante,
         cargo_assinatura: "Tutor"
     })
-    .then((response) => {
-      if(response.data) return response.data;
-      else(swalError(response.Cause));
-    })
+    .then((response) => response.data)
     .then(async (response) => {
         const unsignedCertificateB64 = response.data;
         const signedCertificate = await signCertificate(unsignedCertificateB64);
         downloadPDF(signedCertificate);
     })
     .catch((err) => {
-      console.log(err)
-        swalError(err);
+      swalError(err);
     });
 };
 
