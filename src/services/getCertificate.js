@@ -1,52 +1,36 @@
 import PDFDocument from "@react-pdf/renderer";
 import { toDataURL } from "qrcode";
 import { isEmpty, isAlpha } from "validator";
-import { Base64Encode } from "base64-stream";
+import { encode } from 'js-base64';
 
 //http://localhost:5000/prv-pets/getCertificado
 
-const checkEmpty = (target) => { return isEmpty("" + target); };
-const checkAlpha = (target) => { return isAlpha(("" + target.replace(/ /g, ""), "pt-BR")); };
-
 const validarParametros = async (body) => {
-  if ( checkEmpty(body["pessoa-certificada"]) || !checkAlpha(body["pessoa-certificada"]) ) return { Accept: false, Cause: "Nome da pessoa certificada inválido" };
-  if ( checkEmpty(body["nome-curso"]) || !checkAlpha(body["nome-curso"]) ) return { Accept: false, Cause: "Nome do curso inválido" };
-  if (!["conclusao", "participacao"].includes(body["tipo-certificado"])) return { Accept: false, Cause: "Tipo de certificado inválido, disponíveis: 'conclusao' e 'participacao'" };
+  if ( isEmpty("" + body["pessoa-certificada"]) || !isAlpha( ("" + body["pessoa-certificada"]).replace(/ /g, ""), "pt-BR" ) ) return { Accept: false, Cause: "Nome da pessoa certificada inválido" };
+  if ( isEmpty("" + body["nome-curso"]) || !isAlpha(("" + body["nome-curso"]).replace(/ /g, ""), "pt-BR") ) return { Accept: false, Cause: "Nome do curso inválido" };
+  if (!["conclusao", "participacao"].includes(body["tipo-certificado"])) return { Accept: false, Cause: "Tipo de certificado inválido, dispoíveis: 'conclusao' e 'participacao'" };
   if (!Array.isArray(body["responsaveis-atividade"])) return { Accept: false, Cause: "O campo 'responsaveis-atividade' deve ser um array" };
   if (body["responsaveis-atividade"].length < 1) return { Accept: false, Cause: "O campo 'responsaveis-atividade' deve conter ao menos um nome" };
 
   for (const resp of body["responsaveis-atividade"]) {
-    if ( checkEmpty(resp) || !checkAlpha(resp) ) return { Accept: false, Cause: "O campo 'responsaveis-atividade' tem algum nome inválido" };
+    if ( isEmpty("" + resp) || !isAlpha(("" + resp).replace(/ /g, ""), "pt-BR")) return { Accept: false, Cause: "O campo 'responsaveis-atividade' tem algum nome inválido" };
   }
   
-  //Melhorar essa validação aqui
-  const ci_data = body["cidade-e-data"].split(",");
-  const li = ci_data[0].lastIndexOf(" ");
-  if ( checkEmpty(body["assinatura"]) || !checkAlpha(body["assinatura"]) ) return { Accept: false, Cause: "Nome da assinatura inválido" };
-  if ( checkEmpty(body["cargo-assinatura"]) ) return { Accept: false, Cause: "Cargo da assinatura inválido" };
+  if ( isEmpty("" + body["assinatura"]) || !isAlpha(("" + body["assinatura"]).replace(/ /g, ""), "pt-BR", { ignore: "."})) return { Accept: false, Cause: "Nome da assinatura inválido" };
+  if (isEmpty("" + body["cargo-assinatura"])) return { Accept: false, Cause: "Cargo da assinatura inválido" };
   return { Accept: true, Cause: "Tudo Ok" };
 };
 
-export default async (req) => {
+const generatePDF = async (req) => {
   try {
-    const {
-      pessoa_certificada,
-      nome_curso,
-      tipo_certificado,
-      responsaveis_atividade,
-      cidade_e_data,
-      nome_assinante,
-      cargo_assinatura
-    } = req.body;
-
     const body = {
-      "pessoa-certificada": pessoa_certificada,
-      "nome-curso": nome_curso,
-      "tipo-certificado": tipo_certificado,
-      "responsaveis-atividade": responsaveis_atividade,
-      "cidade-e-data": cidade_e_data,
-      assinatura: nome_assinante,
-      "cargo-assinatura": cargo_assinatura
+      "pessoa-certificada": req.pessoa_certificada,
+      "nome-curso": req.nome_curso,
+      "tipo-certificado": req.tipo_certificado,
+      "responsaveis-atividade": req.responsaveis_atividade,
+      "cidade-e-data": req.cidade_e_data,
+      assinatura: req.nome_assinante,
+      "cargo-assinatura": req.cargo_assinatura
     };
 
     const link_qr = "https://www.google.com.br";
@@ -58,8 +42,8 @@ export default async (req) => {
     }
 
     const tipoCerticado = body["tipo-certificado"];
-    if(tipoCerticado == "conclusao") body["tipo-certificado"] = ", concluiu com exito o(a) ";
-    else if(tipoCerticado == "participacao") body["tipo-certificado"] = ", participou do(a) ";
+    if(tipoCerticado === "conclusao") body["tipo-certificado"] = ", concluiu com exito o(a) ";
+    else if(tipoCerticado === "participacao") body["tipo-certificado"] = ", participou do(a) ";
 
 
     //Daqui para baixo é onde desenha o PDF
@@ -142,7 +126,7 @@ export default async (req) => {
         .font("Helvetica-Bold")
         .text(element, { continued: true, align: "justify" });
 
-        if((ministrantes.length - index) == 2) doc.font("Helvetica").text(" e ", { continued: true, align: "justify" });
+        if((ministrantes.length - index) === 2) doc.font("Helvetica").text(" e ", { continued: true, align: "justify" });
         else if((ministrantes.length - index) > 2) doc.font("Helvetica").text(", ", { continued: true, align: "justify" });
       })
 
@@ -224,11 +208,17 @@ export default async (req) => {
           align: "center"
         }
       );
+      
+      doc.end();
 
-      var pdfB64 = "";
+      const pdfB64 = encode(doc);
+
+      console.log(pdfB64);
+      return { data: pdfB64 };
+
+      /*var pdfB64 = "";
       const stream = doc.pipe(new Base64Encode());
 
-      doc.end();
 
       stream.on("data", (chunk) => {
         pdfB64 += chunk;
@@ -236,10 +226,14 @@ export default async (req) => {
 
       stream.on("end", () => {
         return { data: pdfB64 };
-      });
+      });*/
+
+
     });
   } catch (err) {
     console.log("Erro ao gerar o certificado");
     throw err;
   }
 };
+
+export default generatePDF;
