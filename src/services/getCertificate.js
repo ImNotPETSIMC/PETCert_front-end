@@ -5,23 +5,24 @@ import { Base64Encode } from "base64-stream";
 
 //http://localhost:5000/prv-pets/getCertificado
 
-const checkEmpty = (target) => isEmpty("" + target);
+const checkEmpty = (target) => /*return ?*/ isEmpty("" + target);
+const checkAlpha = (target) => /*return ?*/ isAlpha(("" + target.replace(/ /g, ""), "pt-BR"));
 
 const validarParametros = async (body) => {
-  if ( checkEmpty(body["pessoa-certificada"]) || !isAlpha( ("" + body["pessoa-certificada"]).replace(/ /g, ""), "pt-BR" ) ) return { Accept: false, Cause: "Nome da pessoa certificada inválido" };
-  if ( checkEmpty(body["nome-curso"]) || !isAlpha(("" + body["nome-curso"]).replace(/ /g, ""), "pt-BR") ) return { Accept: false, Cause: "Nome do curso inválido" };
+  if ( checkEmpty(body["pessoa-certificada"]) || !checkAlpha(body["pessoa-certificada"]) ) return { Accept: false, Cause: "Nome da pessoa certificada inválido" };
+  if ( checkEmpty(body["nome-curso"]) || !checkAlpha(body["nome-curso"]) ) return { Accept: false, Cause: "Nome do curso inválido" };
   if (!["conclusao", "participacao"].includes(body["tipo-certificado"])) return { Accept: false, Cause: "Tipo de certificado inválido, dispoíveis: 'conclusao' e 'participacao'" };
   if (!Array.isArray(body["responsaveis-atividade"])) return { Accept: false, Cause: "O campo 'responsaveis-atividade' deve ser um array" };
   if (body["responsaveis-atividade"].length < 1) return { Accept: false, Cause: "O campo 'responsaveis-atividade' deve conter ao menos um nome" };
 
   for (const resp of body["responsaveis-atividade"]) {
-    if ( checkEmpty(resp) || !isAlpha(("" + resp).replace(/ /g, ""), "pt-BR")) return { Accept: false, Cause: "O campo 'responsaveis-atividade' tem algum nome inválido" };
+    if ( checkEmpty(resp) || !checkAlpha(resp) ) return { Accept: false, Cause: "O campo 'responsaveis-atividade' tem algum nome inválido" };
   }
   
   //Melhorar essa validação aqui
   const ci_data = body["cidade-e-data"].split(",");
   const li = ci_data[0].lastIndexOf(" ");
-  if ( checkEmpty(body["assinatura"]) || !isAlpha(("" + body["assinatura"]).replace(/ /g, ""), "pt-BR", { ignore: "."})) return { Accept: false, Cause: "Nome da assinatura inválido" };
+  if ( checkEmpty(body["assinatura"]) || !checkAlpha(body["assinatura"]) ) return { Accept: false, Cause: "Nome da assinatura inválido" };
   if ( checkEmpty(body["cargo-assinatura"]) ) return { Accept: false, Cause: "Cargo da assinatura inválido" };
   return { Accept: true, Cause: "Tudo Ok" };
 };
