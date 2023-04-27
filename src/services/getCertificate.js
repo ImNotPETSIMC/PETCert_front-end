@@ -1,4 +1,4 @@
-import PDFDocument from "pdfkit";
+import PDFDocument from "@react-pdf/renderer";
 import { toDataURL } from "qrcode";
 import { isEmpty, isAlpha } from "validator";
 import { Base64Encode } from "base64-stream";
