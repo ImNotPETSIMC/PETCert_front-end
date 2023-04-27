@@ -5,8 +5,8 @@ import { Base64Encode } from "base64-stream";
 
 //http://localhost:5000/prv-pets/getCertificado
 
-const checkEmpty = (target) => /*return ?*/ isEmpty("" + target);
-const checkAlpha = (target) => /*return ?*/ isAlpha(("" + target.replace(/ /g, ""), "pt-BR"));
+const checkEmpty = (target) => { return isEmpty("" + target); };
+const checkAlpha = (target) => { return isAlpha(("" + target.replace(/ /g, ""), "pt-BR")); };
 
 const validarParametros = async (body) => {
   if ( checkEmpty(body["pessoa-certificada"]) || !checkAlpha(body["pessoa-certificada"]) ) return { Accept: false, Cause: "Nome da pessoa certificada inválido" };
