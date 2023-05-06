@@ -22,7 +22,7 @@ export const downloadPDF = (pdf) => {
   download.click();
 };
 
-export const getCertificate = async ({
+export const getCertificate = async (getPDF_url, signPDF_url, {
   pessoa_certificada,
   nome_curso,
   tipo_certificado,
@@ -33,7 +33,7 @@ export const getCertificate = async ({
   responsaveis_atividade = String(responsaveis_atividade).split(",");
   responsaveis_atividade.map((string) => string.trim());
 
-  Axios.post("http://localhost:8000/getCertificado", {
+  Axios.post(`${getPDF_url}/getCertificado`, {
     pessoa_certificada: pessoa_certificada,
     nome_curso: nome_curso,
     tipo_certificado: tipo_certificado,
@@ -45,7 +45,7 @@ export const getCertificate = async ({
     .then((response) => response.data)
     .then(async (response) => {
       const unsignedCertificateB64 = response.data;
-      const signedCertificate = await signCertificate(unsignedCertificateB64);
+      const signedCertificate = await signCertificate(signPDF_url, unsignedCertificateB64);
       downloadPDF(signedCertificate);
     })
     .catch((err) => {
@@ -53,9 +53,9 @@ export const getCertificate = async ({
     });
 };
 
-export const signCertificate = async (certificateB64) => {
+export const signCertificate = async (certificateB64, signPDF_url) => {
   try {
-    const req = await Axios.post("http://localhost:8500/signature/sign", {
+    const req = await Axios.post(`${signPDF_url}/signature/sign`, {
       data: certificateB64
     });
 
