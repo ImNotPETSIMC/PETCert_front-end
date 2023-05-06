@@ -2,6 +2,7 @@ import PDFDocument from "@react-pdf/pdfkit";
 import { toDataURL } from "qrcode";
 import { isEmpty, isAlpha } from "validator";
 import { encode } from 'js-base64';
+import PETLogo from "../assets/logoPET.png"
 
 //http://localhost:5000/prv-pets/getCertificado
 
@@ -67,34 +68,35 @@ const generatePDF = async (req) => {
       distanceMargin,
       doc.page.width - distanceMargin * 2,
       doc.page.height - distanceMargin * 2
-      )
-      .stroke();
+    )
+    .stroke();
       
-      const maxWidth = 280;
-      const maxHeight = 140;
-      doc.image(
-        __dirname + "../../assets/logo.png", // FIX DIR
-        doc.page.width / 2 - maxWidth / 2,
-        60,
-        {
-          fit: [maxWidth, maxHeight],
-          align: "center"
-        }
-      );
+    const maxWidth = 280;
+    const maxHeight = 140;
+
+    doc.image(
+      PETLogo,
+      doc.page.width / 2 - maxWidth / 2,
+      60,
+      {
+        fit: [maxWidth, maxHeight],
+        align: "center"
+      }
+    );
         
-      const jumpLine = (doc, lines) => { for(let index = 0; index < lines; index++) { doc.moveDown(); } }
+    const jumpLine = (doc, lines) => { for(let index = 0; index < lines; index++) { doc.moveDown(); } }
+    
+    jumpLine(doc, 11);
+    
+    doc
+    .font("Helvetica")
+    .fontSize(28)
+    .fill("#021c27")
+    .font("Times-BoldItalic")
+    .text("Certificado de Conclusão", { align: "center"});
       
-      jumpLine(doc, 11);
+    jumpLine(doc, 1);
       
-      doc
-      .font("Helvetica")
-      .fontSize(28)
-      .fill("#021c27")
-      .font("Times-BoldItalic")
-      .text("Certificado de Conclusão", { align: "center"});
-        
-      jumpLine(doc, 1);
-        
       
     doc
     .fontSize(18)
@@ -189,7 +191,7 @@ const generatePDF = async (req) => {
     const tamanhoQR = 70;
 
     doc.image(
-      __dirname + "/../../public/website/images/logoUFU.png",
+      PETLogo,
       doc.page.width - tamanhoQR - distanceMargin * 2,
       doc.page.height - tamanhoQR - distanceMargin * 2,
       {
@@ -198,6 +200,7 @@ const generatePDF = async (req) => {
       }
     );
     
+
     toDataURL(link_qr, (err, src) => {
       if (err) throw new Error("Erro ao gerar o QrCode");
       doc.image(
@@ -209,29 +212,11 @@ const generatePDF = async (req) => {
           align: "center"
         }
       );
-      
+
       doc.end();
-
-      const pdfB64 = encode(doc);
-
-      return { data: pdfB64 };
-
-      /*var pdfB64 = "";
-      const stream = doc.pipe(new Base64Encode());
-
-
-      stream.on("data", (chunk) => {
-        pdfB64 += chunk;
-      });
-
-      stream.on("end", () => {
-        return { data: pdfB64 };
-      });*/
-
-
     });
   } catch (err) {
-    console.log("Erro ao gerar o certificado");
+    console.log(err);
     throw err;
   }
 };
