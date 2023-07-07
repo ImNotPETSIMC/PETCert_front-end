@@ -53,7 +53,7 @@ export const getCertificate = async (getPDF_url, signPDF_url, {
     });
 };
 
-export const signCertificate = async (certificateB64, signPDF_url) => {
+export const signCertificate = async (signPDF_url, certificateB64) => {
   try {
     const req = await Axios.post(`${signPDF_url}/signature/sign`, {
       data: certificateB64
