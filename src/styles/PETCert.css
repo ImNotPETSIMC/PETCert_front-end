@@ -34,6 +34,8 @@
     justify-content: center;
 
     min-width: fit-content;
+    width: 40vw;
+    max-width: 35rem;
 
     border-top: #f0f0f0 1px solid;
     border-bottom: #f0f0f0 1px solid;
@@ -99,6 +101,7 @@
 
     font-weight: 300;
     font-family: 'Source Sans Pro', sans-serif;
+    font-size: 0.8rem;
 
     transition: all 0.5s;
 }

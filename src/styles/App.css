@@ -8,7 +8,7 @@
 html {
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 300;
-  font-size: 16pt;
+  font-size: 11pt;
 }
 
 .App {
@@ -79,7 +79,7 @@ div#logo {
   flex-direction: column;
   align-items: center;
 
-  margin-top: 10vh;
+  margin-top: 3rem;
 }
 
 div#logo::after {
@@ -91,8 +91,8 @@ div#logo::after {
 }
 
 div#logo > img {
-  height: 110px;
-  width: 110px;
+  height: 5.5rem;
+  width: 5.5rem;
   border-radius: 100%;
   border: solid 1px white;
   background-color: white;
