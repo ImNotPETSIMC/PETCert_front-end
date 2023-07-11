@@ -13,6 +13,18 @@ export const generateInput = (name, fn) => {
   );
 };
 
+export const generateRadio = (name) => {
+  const aux = String(name).replace(" ", "_");
+  const id = String(aux).toLowerCase();
+
+  return (
+    <div className={id + "-container"}>
+      <input type="radio" name="nav-button" id={id} value={id} />
+      <label for={id}>{name}</label>
+    </div>
+  )
+}
+
 export const downloadPDF = (pdf) => {
   const sourceLink = `data:application/pdf;base64,${pdf}`;
   const download = document.createElement("a");
