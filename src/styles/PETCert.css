@@ -119,6 +119,7 @@
     background-color: #1b1f22;
     color: #f0f0f0ff;
     transition: all 0.5s;
+    cursor: pointer;
 }
 
 #inputs-container > div > input:focus {
