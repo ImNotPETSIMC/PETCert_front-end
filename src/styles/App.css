@@ -108,6 +108,46 @@ main {
   margin: 0 10vw;
 }
 
+nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+nav::before {
+  content: "";
+  display: block;
+  width: 1px;
+  height: calc(3.5rem + 1px);
+  background: #ffffff;
+}
+
+nav > div {
+  display: flex;
+
+  border: #f0f0f0 solid 0.1rem;
+  border-radius: 4px;
+}
+
+nav > div > div {
+  background-color: transparent;
+  width: 10rem;
+  color: #f0f0f0ff;
+
+  text-align: center;
+  border-left: #f0f0f0 solid 0.1rem;
+
+  height: 2.75rem;
+  line-height: 2.75rem;
+  text-transform: uppercase;
+
+  font-size: 0.8rem;
+}
+
+nav > div > div > input[type="radio"] {
+  display: none;
+}
+
 footer {
   margin: 2rem 0 2rem 0;
   letter-spacing: 0.2rem;
