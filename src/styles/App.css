@@ -127,6 +127,7 @@ nav > div {
 
   border: #f0f0f0 solid 0.1rem;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 nav > div > div {
@@ -157,6 +158,7 @@ nav > div > div:has(input[type="radio"]:hover) {
 nav > div > div > label {
   display: flex;
   justify-content: center;
+  cursor: pointer;
 
   width: 100%;
   height: 100%;
