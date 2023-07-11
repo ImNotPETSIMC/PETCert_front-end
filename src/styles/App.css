@@ -140,11 +140,10 @@ nav > div > div {
   background-color: transparent;
   color: #f0f0f0ff;
 
-  min-width: 7.5rem;
+  width: 7.5rem;
 
   text-align: center;
-  border-top: #f0f0f0 solid 0.1rem;
-  border-left: #f0f0f0 solid 0.1rem;
+  border: #f0f0f0 solid 0.1rem;
 
   height: 2.75rem;
   line-height: 2.75rem;
@@ -166,8 +165,7 @@ nav > div > div:has(input[type="radio"]:hover) {
 }
 
 nav > div > div > label {
-  display: flex;
-  justify-content: center;
+  display: block;
   cursor: pointer;
 
   width: 100%;
