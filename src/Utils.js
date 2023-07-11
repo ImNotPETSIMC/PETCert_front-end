@@ -13,14 +13,14 @@ export const generateInput = (name, fn) => {
   );
 };
 
-export const generateRadio = (name) => {
+export const generateRadio = (name, fn) => {
   const aux = String(name).replace(" ", "_");
   const id = String(aux).toLowerCase();
 
   return (
     <div className={id + "-container"} key={id}>
       <input type="radio" name="nav-bar" id={id} value={id}/>
-      <label htmlFor={id}>{name}</label>
+      <label htmlFor={id} name={name} onClick={fn}>{name}</label>
     </div>
   )
 }

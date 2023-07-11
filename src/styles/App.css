@@ -142,11 +142,26 @@ nav > div > div {
   text-transform: uppercase;
 
   font-size: 0.8rem;
+  transition: all 1s;
 }
 
 nav > div > div > input[type="radio"] {
   display: none;
 }
+
+nav > div > div:has(input[type="radio"]:hover) {
+  background-color: #ffffff13;
+  transition: all 1s;
+}
+
+nav > div > div > label {
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+}
+
 
 footer {
   margin: 2rem 0 2rem 0;
