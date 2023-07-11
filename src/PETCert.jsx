@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { getCertificate, generateInput } from './Utils';
-import './styles/PETCert.css';
 import { PDF64_API, SIGN_API } from './getEnv';
+import './styles/PETCert.css';
 
 function PETCert() {   
     const inputNames = ["Nome Curso", "Tipo Certificado", "Pessoa Certificada", "Responsaveis Atividade", "Cidade e Data", "Nome Assinante"];

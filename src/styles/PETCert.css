@@ -134,3 +134,7 @@
     animation: 2s ease-in 1s 1 glowBorder;
     animation-iteration-count: infinite;
 }
+
+#inputs-container > div > input[type=file] {
+    display: none;
+}
