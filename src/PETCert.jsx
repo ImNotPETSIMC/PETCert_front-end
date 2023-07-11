@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { getCertificate, generateInput } from './Utils';
-import { PDF64_API, SIGN_API } from './getEnv';
+import { PDF64_API, BACKEND_API } from './getEnv';
 import './styles/PETCert.css';
 
 function PETCert() {   
@@ -24,7 +24,7 @@ function PETCert() {
             <h1>PETCERT</h1>
             <div id='inputs-container'>
                 {inputNames.map((input) => generateInput(input, handleChange))}
-                <button type="submit" id='getCertificate' onClick={() => { getCertificate(PDF64_API, SIGN_API, inputValues); }}>GERAR CERTIFICADO</button>
+                <button type="submit" id='getCertificate' onClick={() => { getCertificate(PDF64_API, BACKEND_API, inputValues); }}>GERAR CERTIFICADO</button>
             </div>
         </div>
     );
