@@ -36,7 +36,7 @@ const PETCertVerify = () => {
                             document.getElementById("data-name").value = file.name;
                         }
                     }} accept='.pdf'/>
-                    <label htmlFor="Certificado">{"Certificado".toUpperCase()}</label>
+                    <label style={{cursor:"pointer"}} htmlFor="Certificado">{"Certificado".toUpperCase()}</label>
                 </div>
                 <div className="key-container" key="pdfKey">
                     <input type="text" name="originalHash" id="pdfKey" placeholder="Assinatura" onChange={handleChange} />
