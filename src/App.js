@@ -12,7 +12,7 @@ function App() {
       <header className="App-header"></header>
       <main>
         <div id="logo"><img src={PETLogo} alt="PET-SIMC Logo" /></div>
-        {/* PETCert */}
+        {/* <PETCert /> */}
         <PETCertVerify/>
         <nav><div>{navOptions.map((option, index) => generateRadio(option, index))}</div></nav>
       </main>

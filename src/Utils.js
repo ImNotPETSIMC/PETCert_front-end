@@ -82,6 +82,23 @@ export const signCertificate = async (signPDF_url, certificateB64) => {
   }
 };
 
+export const verifyCertificate = async (verifyPDF_url, {
+  data,
+  originalHash
+}) => {
+  try {
+    const req = await Axios.post(`${verifyPDF_url}/signature/verify`, {
+      data: data,
+      originalHash: originalHash
+    });
+
+    const response = req.data;
+    swalSuccess(response.response.message);
+  } catch (error) {
+    swalError(error.response.data.error);
+  }
+};
+
 const swalError = (errorMessage) => {
   Swal.fire({
     icon: "error",
@@ -91,3 +108,13 @@ const swalError = (errorMessage) => {
     confirmButtonColor: "#1B1F22"
   });
 };
+
+const swalSuccess = (message) => {
+  Swal.fire({
+    icon: "success",
+    title: "SOLICITAÇÃO SUCEDIDA",
+    text: message,
+    background: "#D0D0D0FF",
+    confirmButtonColor: "#1B1F22"
+  });
+}
