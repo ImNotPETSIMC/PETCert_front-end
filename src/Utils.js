@@ -6,7 +6,7 @@ export const generateInput = (name, fn) => {
   const id = String(aux).toLowerCase();
 
   return (
-    <div className={id + "-container"}>
+    <div className={id + "-container"} key={id}>
       <input type="text" name={id} id={id} placeholder={name} onChange={fn} />
       <label htmlFor={id}>{name.toUpperCase()}</label>
     </div>
@@ -18,9 +18,9 @@ export const generateRadio = (name) => {
   const id = String(aux).toLowerCase();
 
   return (
-    <div className={id + "-container"}>
-      <input type="radio" name="nav-button" id={id} value={id} />
-      <label for={id}>{name}</label>
+    <div className={id + "-container"} key={id}>
+      <input type="radio" name="nav-bar" id={id} value={id}/>
+      <label htmlFor={id}>{name}</label>
     </div>
   )
 }
