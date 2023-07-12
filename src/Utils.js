@@ -29,8 +29,8 @@ export const generateRadio = (name, fn) => {
 export const generateCertificateContainer = ({data, hashPdf, hashSignedPdf, signedPdf}) => { 
   
   return (
-    <div className='certificate-container'>
-      <div className='pdf-container'>
+    <div className='certificate-container' key={data}>
+      <div className='certificate-pdf-container'>
           <div className='button-container'>
               <button><img src={pdfIcon} alt="" onClick={() => downloadPDF(data)}/></button>
               <label htmlFor="">PDF Original</label>
@@ -40,7 +40,7 @@ export const generateCertificateContainer = ({data, hashPdf, hashSignedPdf, sign
               <label>Hash Original</label>
           </div>
       </div>
-      <div className='pdf-container'>
+      <div className='certificate-pdf-container'>
           <div className='hash-container'>
               <input readOnly type="text" value={hashSignedPdf}/>
               <label>Hash Assinado</label>

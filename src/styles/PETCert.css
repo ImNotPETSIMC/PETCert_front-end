@@ -57,7 +57,7 @@
     font-weight: 500;
 }
 
-#inputs-container {
+#inputs-container, .certificate-container {
     display: flex;
     flex-wrap: wrap;
     row-gap: 1rem;
@@ -72,18 +72,18 @@
     gap: 1.4rem 0rem;
 }
 
-.input-container, .button-container, .hash-container {
-    flex-basis: 50%;
-
+.input-container, .button-container, .hash-container, .pdf-container, .key-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    
+    flex-basis: 50%;
+    
     gap: 0.5rem;
 }
 
-.input-container > input, #inputs-container > button, .hash-container > input {
+.input-container > input, #inputs-container > button, .hash-container > input, .pdf-container > input, .pdf-container > button, .key-container > input {
     background-color: transparent;
 
     font: large light;
@@ -120,7 +120,7 @@
     cursor: pointer;
 }
 
-.input-container > input:focus {
+.input-container > input:focus, .pdf-container > input:focus, .key-container > input:focus {
     border-color: transparent;
     border-bottom: #f0f0f0 solid 0.1rem;
     outline: 0;
@@ -128,22 +128,13 @@
     transition: border 0.5;
 }
 
-.input-container > input:placeholder-shown{
+.input-container > input:placeholder-shown, .pdf-container > input:placeholder-shown {
     animation: 2s ease-in 1s 1 glowBorder;
     animation-iteration-count: infinite;
 }
 
-.input-container > input[type=file] {
+.input-container > input[type=file], .pdf-container > input[type=file] {
     display: none;
-}
-
-.pdf-container, .certificate-container {
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    margin: 0.25rem;
 }
 
 .button-container > button {
@@ -169,4 +160,13 @@
 .button-container > button > img {
     width: 1.5rem;
     filter: grayscale(1) invert(1);
+}
+
+.certificate-pdf-container {
+    display: flex;
+}
+
+.certificate-container {
+    margin: 0 0 1rem 0;
+    gap: 0.5rem;
 }
