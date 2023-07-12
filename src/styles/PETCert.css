@@ -72,7 +72,7 @@
     gap: 1.4rem 0rem;
 }
 
-#inputs-container > div {
+.input-container {
     flex-basis: 50%;
 
     display: flex;
@@ -83,7 +83,7 @@
     gap: 0.5rem;
 }
 
-#inputs-container > div > input, #inputs-container > button {
+.input-container > input, #inputs-container > button {
     background-color: transparent;
 
     font: large light;
@@ -120,7 +120,7 @@
     cursor: pointer;
 }
 
-#inputs-container > div > input:focus {
+.input-container > input:focus {
     border-color: transparent;
     border-bottom: #f0f0f0 solid 0.1rem;
     outline: 0;
@@ -128,11 +128,11 @@
     transition: border 0.5;
 }
 
-#inputs-container > div > input:placeholder-shown{
+.input-container > input:placeholder-shown{
     animation: 2s ease-in 1s 1 glowBorder;
     animation-iteration-count: infinite;
 }
 
-#inputs-container > div > input[type=file] {
+.input-container > input[type=file] {
     display: none;
 }
