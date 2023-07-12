@@ -1,5 +1,6 @@
 import Axios from "axios";
 import Swal from "sweetalert2";
+import pdfIcon from './assets/pdf-ico.svg'
 
 export const generateInput = (name, fn) => {
   const aux = String(name).replace(" ", "_");
@@ -21,6 +22,34 @@ export const generateRadio = (name, fn) => {
     <div className="radio-container" key={id}>
       <input type="radio" name="nav-bar" id={id} value={id}/>
       <label htmlFor={id} name={name} onClick={fn}>{name}</label>
+    </div>
+  )
+};
+
+export const generateCertificateContainer = ({data, hashPdf, hashSignedPdf, signedPdf}) => { 
+  
+  return (
+    <div className='certificate-container'>
+      <div className='pdf-container'>
+          <div className='button-container'>
+              <button><img src={pdfIcon} alt="" onClick={() => downloadPDF(data)}/></button>
+              <label htmlFor="">PDF Original</label>
+          </div>
+          <div className='hash-container'>
+              <input readOnly type="text" value={hashPdf}/>
+              <label>Hash Original</label>
+          </div>
+      </div>
+      <div className='pdf-container'>
+          <div className='hash-container'>
+              <input readOnly type="text" value={hashSignedPdf}/>
+              <label>Hash Assinado</label>
+          </div>
+          <div className='button-container'>
+              <button><img src={pdfIcon} alt="" onClick={ () => downloadPDF(signedPdf) } /></button>
+              <label htmlFor="">PDF Assinado</label>
+          </div>
+      </div>
     </div>
   )
 }
