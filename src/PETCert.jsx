@@ -24,7 +24,7 @@ function PETCert() {
         <div className="PETCert">
             <h1>PETCERT</h1>
             <div id='inputs-container'>
-                {inputNames.map((input) => { return <Input value={input.value} name={input.name} info={input.info} fn={handleChange}/> })}
+                {inputNames.map((input) => { return <Input key={input.value + "-input"} value={input.value} name={input.name} info={input.info} fn={handleChange}/> })}
                 <button type="submit" id='getCertificate' onClick={() => { getCertificate(PDF64_API, BACKEND_API, inputValues); }}>GERAR CERTIFICADO</button>
             </div>
         </div>

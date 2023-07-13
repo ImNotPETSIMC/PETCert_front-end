@@ -3,9 +3,9 @@ const Radio = (props) => {
     const id = String(aux).toLowerCase();
   
     return (
-      <div className="radio-container" key={id}>
-        <input type="radio" name="nav-bar" id={id} value={id}/>
-        <label htmlFor={id} name={props.name} onClick={props.fn}>{props.name}</label>
+      <div className="radio-container">
+        <input type="radio" name="nav-bar" id={id + "-input"} value={id}/>
+        <label htmlFor={id + "-input"} name={props.name} onClick={props.fn}>{props.name}</label>
       </div>
     )
 };
