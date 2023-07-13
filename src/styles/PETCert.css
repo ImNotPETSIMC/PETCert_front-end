@@ -195,6 +195,7 @@
     opacity: 0.2;
     transition-property: width height;
     transition-duration: 2s;
+    transition-timing-function: ease-in-out;
 }
 
 .input-container:hover > label:hover > .info-container{
