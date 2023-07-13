@@ -12,10 +12,13 @@ import './styles/App.css';
 function App() {
   const navOptions = ["Gerar", "Verificar", "Historico", "Deslogar"]
   const [navSelected, setNavSelected] = useState("Gerar");
+  const [ username ] = useState(localStorage.getItem("username"));
   const [ password ] = useState(localStorage.getItem("password"));
+  const isLogged = authCheck(username, password);
   
   const generateScreen = (option) => {
-    if(!authCheck(password)) return <PETCert />
+
+    if(!isLogged) return <PETCert />
     if(option === "Gerar") return <PETCertGenerate/>
     if(option === "Verificar") return <PETCertVerify />
     if(option === "Historico") return <PETCertHistory />
@@ -24,25 +27,13 @@ function App() {
 
   const handleChange = (event) => setNavSelected(event.target.getAttribute('name'));
 
-  if(!authCheck(password)) return (
-    <div className="App">
-      <header className="App-header"></header>
-      <main>
-        <div id="logo"><img src={PETLogo} alt="PET-SIMC Logo" /></div>
-        {generateScreen(navSelected)}
-      </main>
-      <footer>© 2023 - Sistemas de Informação. Todos os direitos reservados.</footer>
-    </div>
-  )
-
-
   return (
     <div className="App">
       <header className="App-header"></header>
       <main>
         <div id="logo"><img src={PETLogo} alt="PET-SIMC Logo" /></div>
         {generateScreen(navSelected)}
-        <nav><div>{navOptions.map((option) => { return <Radio key={option + "-radio"} name={option} fn={handleChange}/> })}</div></nav>
+        {() => {if(isLogged) return (<nav><div>{navOptions.map((option) => { return <Radio key={option + "-radio"} name={option} fn={handleChange}/> })}</div></nav>) }}
       </main>
       <footer>© 2023 - Sistemas de Informação. Todos os direitos reservados.</footer>
     </div>

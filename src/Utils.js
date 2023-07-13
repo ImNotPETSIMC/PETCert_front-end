@@ -1,6 +1,6 @@
 import Axios from "axios";
 import Swal from "sweetalert2";
-import { PASSWORD } from "./getEnv";
+import { PASSWORD, USERNAME } from "./getEnv";
 
 export const downloadPDF = (pdf) => {
   const sourceLink = `data:application/pdf;base64,${pdf}`;
@@ -126,9 +126,10 @@ export const normalizeString = (string, type) => {
   return string.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
 };
 
-export const authCheck = (password) => {  
+export const authCheck = (username, password) => {  
+  localStorage.setItem("username", username); 
   localStorage.setItem("password", password); 
 
-  if(password !== PASSWORD) return false;
+  if(username !== USERNAME || password !== PASSWORD ) return false;
   return true;
 };
