@@ -5,8 +5,8 @@
 
 @keyframes expands {
     0% { max-height: 0;}
-    50% { max-height: 100vh;}
-    100% { max-height: auto;}
+    50% { max-height: 125vh;}
+    100% { max-height: fit-content; }
 }
 
 @keyframes glowBorder {
