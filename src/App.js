@@ -1,6 +1,6 @@
 import Radio from './components/Radio';
-import PETCert from './PETCert';
 import PETLogo from './assets/logo.jpeg'
+import PETCert from './PETCertGenerate';
 import PETCertVerify from './PETCertVerify';
 import PETCertHistory from './PETCertHistory';
 import { useState } from 'react';
