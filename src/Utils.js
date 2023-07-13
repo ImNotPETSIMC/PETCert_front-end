@@ -1,18 +1,6 @@
 import Axios from "axios";
 import Swal from "sweetalert2";
 
-export const generateInput = (name, fn) => {
-  const aux = String(name).replace(" ", "_");
-  const id = String(aux).toLowerCase();
-
-  return (
-    <div className="input-container" key={id}>
-      <input type="text" name={id} id={id} placeholder={name} onChange={fn} />
-      <label htmlFor={id}>{name.toUpperCase()}</label>
-    </div>
-  );
-};
-
 export const downloadPDF = (pdf) => {
   const sourceLink = `data:application/pdf;base64,${pdf}`;
   const download = document.createElement("a");
@@ -105,4 +93,4 @@ const swalSuccess = (message) => {
     background: "#D0D0D0FF",
     confirmButtonColor: "#1B1F22"
   });
-}
+};
