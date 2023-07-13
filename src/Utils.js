@@ -18,8 +18,11 @@ export const getCertificate = async (getPDF_url, signPDF_url, {
   cidade_e_data,
   nome_assinante
 }) => {
+  swalAlert("Seu certificado está em processo.");
+  
   responsaveis_atividade = String(responsaveis_atividade).split(",");
   responsaveis_atividade.map((string) => string.trim());
+
 
   Axios.post(`${getPDF_url}/getCertificado`, {
     pessoa_certificada: pessoa_certificada,
@@ -62,6 +65,8 @@ export const verifyCertificate = async (verifyPDF_url, {
   data,
   originalHash
 }) => {
+  swalAlert("Seu pedido de verificação está em processo.");
+  
   try {
     const req = await Axios.post(`${verifyPDF_url}/signature/verify`, {
       data: data,
@@ -92,5 +97,16 @@ const swalSuccess = (message) => {
     text: message,
     background: "#D0D0D0FF",
     confirmButtonColor: "#1B1F22"
+  });
+};
+
+const swalAlert = (message) => {
+  Swal.fire({
+    icon: "info",
+    title: "SOLICITAÇÃO EM ANDAMENTO",
+    text: message,
+    background: "#D0D0D0FF",
+    confirmButtonColor: "#1B1F22",
+    timer: 5000
   });
 };
