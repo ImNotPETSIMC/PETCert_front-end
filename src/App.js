@@ -1,22 +1,24 @@
 import Radio from './components/Radio';
-import PETCert from './PETCert';
 import PETLogo from './assets/logo.jpeg'
+import PETCert from './PETCertGenerate';
 import PETCertVerify from './PETCertVerify';
 import PETCertHistory from './PETCertHistory';
 import { useState } from 'react';
 import './styles/App.css';
+import PETCertGenerate from './PETCertGenerate';
 
 function App() {
   const navOptions = ["Gerar", "Verificar", "Historico"]
   const [navSelected, setNavSelected] = useState("Gerar");
   
   const generateScreen = (option) => {
-    if(option === "Gerar") return <PETCert/>
+    if(option === "Gerar") return <PETCertGenerate/>
     if(option === "Verificar") return <PETCertVerify />
     if(option === "Historico") return <PETCertHistory />
   }
 
   const handleChange = (event) => setNavSelected(event.target.getAttribute('name'));
+
 
   return (
     <div className="App">
