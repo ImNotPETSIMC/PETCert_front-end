@@ -1,5 +1,6 @@
 import Axios from "axios";
 import Swal from "sweetalert2";
+import { PASSWORD } from "./getEnv";
 
 export const downloadPDF = (pdf) => {
   const sourceLink = `data:application/pdf;base64,${pdf}`;
@@ -80,7 +81,7 @@ export const verifyCertificate = async (verifyPDF_url, {
   }
 };
 
-const swalError = (errorMessage) => {
+export const swalError = (errorMessage) => {
   Swal.fire({
     icon: "error",
     title: "SOLICITAÇÃO FALHOU",
@@ -123,4 +124,11 @@ export const normalizeString = (string, type) => {
     }).join(" ").trim();
   }
   return string.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
-}
+};
+
+export const authCheck = (password) => {  
+  localStorage.setItem("password", password); 
+
+  if(password !== PASSWORD) return false;
+  return true;
+};
