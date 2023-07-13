@@ -18,7 +18,6 @@ function PETCert() {
     const handleChange = (event) => {
         const {name, value} = event.target;
         setInputValues((prevState) => { return { ...prevState, [name]: normalizeString(value, name), }});
-        console.log(inputValues);
     };
 
     return (
