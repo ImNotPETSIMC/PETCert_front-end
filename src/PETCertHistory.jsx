@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
+import CertificateContainer from './components/CertificateContainer';
+import { useEffect, useId, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { firebaseDB } from './firebaseConfig';
-import { generateCertificateContainer } from './Utils';
 import './styles/PETCert.css';
 
 const PETCertHistory = () => { 
     const certificatesCollectionRef = collection(firebaseDB, 'certificates');
     const [certificates, setCertificates] = useState([]);
+    const ids = [useId(), useId(), useId(), useId(), useId(), useId()];
 
     useEffect(() => {
         const getPDFs = async () => {
@@ -20,7 +21,7 @@ const PETCertHistory = () => {
         <div className="PETCert">
             <h1>PETCERT</h1>
             <div id='inputs-container'>
-                {certificates.map((certificate) => generateCertificateContainer(certificate))}
+                {certificates.map((certificate) => { return <CertificateContainer ids={ids} pdf={certificate}/> })}
             </div>
         </div>
     );
