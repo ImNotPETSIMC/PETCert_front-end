@@ -110,3 +110,17 @@ const swalAlert = (message) => {
     timer: 5000
   });
 };
+
+export const normalizeString = (string, type) => {
+  string = String(string);
+  if(string.replace(/\s+/g, ' ').trim().length <= 1) return string;
+  const dontCapitalize = ["de", "da", "do", "janeiro", "fevereiro", "março", "abril", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+
+  if(type !== "tipo_certificado") {
+    return String(string).replace(/\s+/g, ' ').trim().split(" ").map(word => { 
+      if(dontCapitalize.includes(word)) return word;
+      return word[0].toUpperCase() + word.slice(1);
+    }).join(" ").trim();
+  }
+  return string.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+}

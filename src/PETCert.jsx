@@ -1,6 +1,6 @@
 import Input from './components/Input';
 import { useState } from 'react';
-import { getCertificate } from './Utils';
+import { getCertificate, normalizeString } from './Utils';
 import { PDF64_API, BACKEND_API } from './getEnv';
 import './styles/PETCert.css';
 
@@ -17,7 +17,8 @@ function PETCert() {
 
     const handleChange = (event) => {
         const {name, value} = event.target;
-        setInputValues((prevState) => { return { ...prevState, [name]: value, } });
+        setInputValues((prevState) => { return { ...prevState, [name]: normalizeString(value, name), }});
+        console.log(inputValues);
     };
 
     return (
