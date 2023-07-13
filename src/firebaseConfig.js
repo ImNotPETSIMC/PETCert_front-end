@@ -1,14 +1,11 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-
-const apiKey = process.env.REACT_APP_API_KEY;
-const authDomain = process.env.REACT_APP_AUTH_DOMAIN;
-const projectId = process.env.REACT_APP_PROJECT_ID;
+import { API_KEY, AUTH_DOMAIN, PROJECT_ID } from "./getEnv";
 
 const firebaseConfig = {
-    apiKey: apiKey,
-    authDomain: authDomain, 
-    projectId: projectId
+    apiKey: API_KEY,
+    authDomain: AUTH_DOMAIN, 
+    projectId: PROJECT_ID
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
