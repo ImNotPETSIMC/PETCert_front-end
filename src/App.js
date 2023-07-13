@@ -1,9 +1,9 @@
 import './styles/App.css';
+import Radio from './components/Radio';
 import PETCert from './PETCert';
 import PETLogo from './assets/logo.jpeg'
 import PETCertVerify from './PETCertVerify';
 import PETCertHistory from './PETCertHistory';
-import { generateRadio } from './Utils';
 import { useState } from 'react';
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
       <main>
         <div id="logo"><img src={PETLogo} alt="PET-SIMC Logo" /></div>
         {generateScreen(navSelected)}
-        <nav><div>{navOptions.map((option) => generateRadio(option, handleChange))}</div></nav>
+        <nav><div>{navOptions.map((option) => { return <Radio name={option} fn={handleChange}/> })}</div></nav>
       </main>
       <footer>© 2023 - Sistemas de Informação. Todos os direitos reservados.</footer>
     </div>
