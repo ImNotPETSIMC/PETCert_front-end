@@ -1,10 +1,10 @@
-import './styles/App.css';
 import Radio from './components/Radio';
 import PETCert from './PETCert';
 import PETLogo from './assets/logo.jpeg'
 import PETCertVerify from './PETCertVerify';
 import PETCertHistory from './PETCertHistory';
 import { useState } from 'react';
+import './styles/App.css';
 
 function App() {
   const navOptions = ["Gerar", "Verificar", "Historico"]
