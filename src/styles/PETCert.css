@@ -62,6 +62,7 @@
     display: flex;
     flex-wrap: wrap;
     row-gap: 1rem;
+    position: relative;
     
     max-width: 100%;
     min-width: fit-content;
@@ -84,7 +85,7 @@
     gap: 0.5rem;
 }
 
-.input-container > input, #inputs-container > button, .hash-container > input, .pdf-container > input, .pdf-container > button, .key-container > input {
+.input-container > input, #inputs-container > button, .hash-container > input, .pdf-container > input, .pdf-container > button, .key-container > input, .info-container {
     background-color: transparent;
 
     font: large light;
@@ -134,7 +135,7 @@
     animation-iteration-count: infinite;
 }
 
-.input-container > input[type=file], .pdf-container > input[type=file] {
+.input-container > input[type=file], .pdf-container > input[type=file], .info-container {
     display: none;
 }
 
@@ -170,4 +171,54 @@
 .certificate-container {
     margin: 0 0 1rem 0;
     gap: 0.5rem;
+}
+
+.input-container > label {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.input-container:hover > label > .info-container, .input-container:hover > label:hover > .info-container:hover {
+    display: flex;
+    background-color: #121314f1;
+
+    width: 1rem;
+    height: 1rem;
+    
+    border-radius: 100%;
+    
+    position: absolute;
+    right: -1.5rem;
+    
+    align-items: center;
+    opacity: 0.2;
+    transition-property: width height;
+    transition-duration: 2s;
+}
+
+.input-container:hover > label:hover > .info-container{
+    min-width: 1rem;
+    min-height: 1rem;
+    width: 10rem;
+    height: 5rem;
+
+    right: -9.5rem;
+    z-index: 1;
+
+    border-radius: 4px;
+    opacity: 1;
+    transition: all 1s;
+}
+
+.input-container:hover > label:hover > .info-container > p {
+    opacity: 1;
+    transition: all 5s;
+}
+
+.input-container:hover > label > .info-container > p,  .input-container:hover > label:hover > .info-container:hover > p {
+    font-size: smaller;
+    line-height: 1rem;
+    width: 100%;
+    opacity: 0;
 }

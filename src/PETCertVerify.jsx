@@ -38,9 +38,9 @@ const PETCertVerify = () => {
                     }} accept='.pdf'/>
                     <label style={{cursor:"pointer"}} htmlFor="Certificado">{"Certificado".toUpperCase()}</label>
                 </div>
-                <div className="key-container" key="pdfKey">
+                <div className="input-container" key="pdfKey">
                     <input type="text" name="originalHash" id="pdfKey" placeholder="Assinatura" onChange={handleChange} />
-                    <label htmlFor="pdfKey">{"chave".toUpperCase()}</label>
+                    <label htmlFor="pdfKey">{"chave".toUpperCase()}<div className="info-container"><p>Assinatura Presente no Certificado</p></div></label>
                 </div>
                 <button type="submit" id='verifyCertificate' onClick={() => { verifyCertificate(BACKEND_API, inputValues); }}>VERIFICAR CERTIFICADO</button>
             </div>
