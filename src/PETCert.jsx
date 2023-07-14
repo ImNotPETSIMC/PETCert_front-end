@@ -4,7 +4,7 @@ import { authCheck, swalError } from './Utils';
 import './styles/PETCert.css';
 
 const PETCert = () => {   
-    const inputNames = [{name: "Usuário de Acesso", value: "username", info:"Usuário de Acesso ao Projeto PETCert"}, {name: "Senha de Acesso", value: "password", info:"Senha de Acesso ao Projeto PETCert", password: true}];
+    const inputNames = [{name: "Usuário de Acesso", value: "username", info:"Usuário de Acesso ao PETCert"}, {name: "Senha de Acesso", value: "password", info:"Senha de Acesso ao PETCert", password: true}];
     const [inputValues, setInputValues] = useState({ username:"", password: ""});
 
     const handleChange = (event) => {
