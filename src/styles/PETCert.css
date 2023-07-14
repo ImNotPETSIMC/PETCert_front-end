@@ -135,7 +135,7 @@
     animation-iteration-count: infinite;
 }
 
-.input-container > input[type=file], .pdf-container > input[type=file], .info-container {
+.input-container > input[type=file], .pdf-container > input[type=file] {
     display: none;
 }
 
@@ -179,7 +179,7 @@
     position: relative;
 }
 
-.input-container:hover > label > .info-container, .input-container:hover > label:hover > .info-container:hover {
+.input-container > label > .info-container, .input-container:hover > label:hover > .info-container:hover {
     display: flex;
     background-color: #121314f1;
 
@@ -193,12 +193,18 @@
     
     align-items: center;
     opacity: 0.2;
-    transition-property: width height;
     transition-duration: 2s;
     transition-timing-function: ease-in-out;
 }
 
-.input-container:hover > label:hover > .info-container{
+.info-container {
+    background: url("../assets/exclamation.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.input-container > label:hover > .info-container{
     min-width: 1rem;
     min-height: 1rem;
     width: 10rem;
@@ -210,14 +216,15 @@
     border-radius: 4px;
     opacity: 1;
     transition: all 1s;
+    background-image: url("../assets/overlay.png");
 }
 
-.input-container:hover > label:hover > .info-container > p {
+.input-container > label:hover > .info-container > p {
     opacity: 1;
     transition: all 5s;
 }
 
-.input-container:hover > label > .info-container > p,  .input-container:hover > label:hover > .info-container:hover > p {
+.input-container > label > .info-container > p,  .input-container:hover > label:hover > .info-container:hover > p {
     font-size: smaller;
     line-height: 1rem;
     width: 100%;
