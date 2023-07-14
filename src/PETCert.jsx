@@ -1,6 +1,6 @@
 import Input from './components/Input';
 import { useState, useEffect } from 'react';
-import { authCheck, swalError } from './Utils';
+import { authCheck, keyListener, swalError } from './Utils';
 import './styles/PETCert.css';
 
 const PETCert = () => {   
@@ -20,21 +20,9 @@ const PETCert = () => {
     useEffect(() => {
         const loginButton = document.getElementById("loginButton");
 
-        window.addEventListener("keydown", event => {
-            if (event.key === "Enter") {
-                event.preventDefault();
-                loginButton.click();
-            }
-        });
+        keyListener(window, loginButton, "add");
 
-        return () => {
-            window.removeEventListener("keydown", event => {
-                if (event.key === "Enter") {
-                    event.preventDefault();
-                    loginButton.click();
-                }
-            });
-        }
+        return () => { keyListener(window, loginButton, "remove"); }
     }, []);
     
     return (

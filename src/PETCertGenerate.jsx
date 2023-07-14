@@ -1,6 +1,6 @@
 import Input from './components/Input';
-import { useState } from 'react';
-import { getCertificate, getDate, normalizeString } from './Utils';
+import { useState, useEffect } from 'react';
+import { getCertificate, getDate, keyListener, normalizeString } from './Utils';
 import { PDF64_API, BACKEND_API } from './getEnv';
 import './styles/PETCert.css';
 
@@ -19,6 +19,14 @@ const PETCertGenerate = () => {
         const {name, value} = event.target;
         setInputValues((prevState) => { return { ...prevState, [name]: normalizeString(value, name), }});
     };
+
+    useEffect(() => {
+        const getCertificateButton = document.getElementById("getCertificate");
+
+        keyListener(window, getCertificateButton, "add");
+
+        return () => { keyListener(window, getCertificateButton, "remove"); }
+    }, []);
 
     return (
         <div className="PETCert">

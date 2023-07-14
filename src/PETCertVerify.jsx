@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { verifyCertificate } from './Utils';
+import { useEffect, useState } from 'react';
+import { keyListener, verifyCertificate } from './Utils';
 import { BACKEND_API } from './getEnv';
 import './styles/PETCert.css';
 
@@ -22,6 +22,14 @@ const PETCertVerify = () => {
             setInputValues((prevState) => { return { ...prevState, data: fileReader.result.split(',')[1], }})
         }
     }
+
+    useEffect(() => {
+        const verifyCertificateButton = document.getElementById("verifyCertificate");
+
+        keyListener(window, verifyCertificateButton, "add");
+
+        return () => { keyListener(window, verifyCertificateButton, "remove"); }
+    }, []);
 
     return (
         <div className="PETCert">

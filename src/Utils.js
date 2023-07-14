@@ -143,4 +143,29 @@ export const getDate = () => {
   const year = date.getFullYear();
 
   return `${day} de ${month} de ${year}`; 
-}
+};
+
+export const keyListener = (listener, button, type) => {
+  if(type === "add"){
+    return (
+      listener.addEventListener("keydown", event => {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          button.click();
+        }
+      })
+    )
+  }
+
+  if(type === "remove"){
+    return (
+      listener.removeEventListener("keydown", event => {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          button.click();
+        }
+      })
+    )
+  }
+
+};
