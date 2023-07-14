@@ -41,7 +41,7 @@ function App() {
         {generateScreen(navSelected)}
         {navBar(isLogged)}
       </main>
-      <footer>© 2023 - Sistemas de Informação. Todos os direitos reservados.</footer>
+      <footer>© {new Date().getFullYear()} - Sistemas de Informação. Todos os direitos reservados.</footer>
     </div>
   );
 }
