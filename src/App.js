@@ -25,6 +25,12 @@ function App() {
     if(option === "Deslogar") localStorage.clear(); window.location.reload();
   }
 
+  const navBar = (isLogged) => {
+    if(isLogged) return (
+      <nav><div>{navOptions.map((option) => { return <Radio key={option + "-radio"} name={option} fn={handleChange}/> })}</div></nav>
+    )
+  }
+
   const handleChange = (event) => setNavSelected(event.target.getAttribute('name'));
 
   return (
@@ -33,7 +39,7 @@ function App() {
       <main>
         <div id="logo"><img src={PETLogo} alt="PET-SIMC Logo" /></div>
         {generateScreen(navSelected)}
-        {() => {if(isLogged) return (<nav><div>{navOptions.map((option) => { return <Radio key={option + "-radio"} name={option} fn={handleChange}/> })}</div></nav>) }}
+        {navBar(isLogged)}
       </main>
       <footer>© 2023 - Sistemas de Informação. Todos os direitos reservados.</footer>
     </div>
