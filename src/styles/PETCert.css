@@ -231,6 +231,6 @@
     opacity: 0;
 }
 
-.getPassword-container > .input-container {
+.login-container > .input-container {
     flex-basis: 100%;
 }

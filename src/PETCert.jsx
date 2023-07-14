@@ -1,5 +1,5 @@
 import Input from './components/Input';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { authCheck, swalError } from './Utils';
 import './styles/PETCert.css';
 
@@ -16,13 +16,33 @@ const PETCert = () => {
         if(authCheck(username, password)) window.location.reload();
         else swalError("Usuário ou Senha Incorreta");
     };
+
+    useEffect(() => {
+        const loginButton = document.getElementById("loginButton");
+
+        window.addEventListener("keydown", event => {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                loginButton.click();
+            }
+        });
+
+        return () => {
+            window.removeEventListener("keydown", event => {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    loginButton.click();
+                }
+            });
+        }
+    }, []);
     
     return (
         <div className="PETCert">
             <h1>PETCERT</h1>
-            <div id='inputs-container' className='getPassword-container'>
+            <div id='inputs-container' className='login-container'>
                 {inputNames.map((input) => { return <Input key={input.value + "-input"} value={input.value} name={input.name} info={input.info} fn={handleChange} password={input.password}/> })}
-                <button type="submit" id='getPassword' onClick={() => { logIn(inputValues.username, inputValues.password); }}>FAZER LOGIN</button>
+                <button type="submit" id='loginButton' onClick={() => { logIn(inputValues.username, inputValues.password); }}>FAZER LOGIN</button>
             </div>
         </div>
     );
