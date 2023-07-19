@@ -48,7 +48,12 @@ export const getCertificate = async (getPDF_url, signPDF_url, {
 export const signCertificate = async (signPDF_url, certificateB64) => {
   try {
     const req = await Axios.post(`${signPDF_url}/signature/sign`, {
-      data: certificateB64
+      data: certificateB64,
+      headers: {                  
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Authorization", 
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+      }
     });
 
     const response = req.data;
@@ -71,7 +76,12 @@ export const verifyCertificate = async (verifyPDF_url, {
   try {
     const req = await Axios.post(`${verifyPDF_url}/signature/verify`, {
       data: data,
-      originalHash: originalHash
+      originalHash: originalHash,
+      headers: {                  
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Authorization", 
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+      }
     });
 
     const response = req.data;
