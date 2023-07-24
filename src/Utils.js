@@ -1,6 +1,7 @@
 import Axios from "axios";
 import Swal from "sweetalert2";
 import { PASSWORD, USERNAME } from "./getEnv";
+import md5 from "md5";
 
 export const downloadPDF = (pdf) => {
   const sourceLink = `data:application/pdf;base64,${pdf}`;
@@ -137,10 +138,13 @@ export const normalizeString = (string, type) => {
 };
 
 export const authCheck = (username, password) => {  
+  const userRef = username ? md5(username) : "null";
+  const passwordRef = password ? md5(password) : "null";
+
   localStorage.setItem("username", username); 
   localStorage.setItem("password", password); 
 
-  if(username !== USERNAME || password !== PASSWORD ) return false;
+  if(userRef !== USERNAME || passwordRef !== PASSWORD ) return false;
   return true;
 };
 
